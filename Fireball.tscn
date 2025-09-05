@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbj4atteana13"]
+
+[ext_resource type="Script" uid="uid://b33yuuwi110rm" path="res://fireball.gd" id="1_e3tp1"]
+[ext_resource type="Texture2D" uid="uid://l2bn8knk78it" path="res://Fireball.png" id="1_yn1k2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3tp1"]
+size = Vector2(34, 17)
+
+[node name="Node2D" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_e3tp1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yn1k2")
+
+[node name="fireball_area" type="Area2D" parent="." groups=["fireball"]]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fireball_area"]
+position = Vector2(5, -1.5)
+shape = SubResource("RectangleShape2D_e3tp1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="area_entered" from="fireball_area" to="." method="_on_fireball_area_area_entered"]
